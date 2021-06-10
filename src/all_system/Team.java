@@ -1,4 +1,12 @@
+/**
+ * @author paula
+ * @version 1.1
+ */
+
 package all_system;
+
+
+
 public class Team {
     public final player [] player;
     public int counter;
@@ -6,6 +14,11 @@ public class Team {
         player=new player[number];
         counter = 0;
     }
+
+    /**
+     *
+     * @param player1
+     */
     public void addPlayer(player player1){
         if(counter!=player.length){
             player[counter]=player1;
@@ -13,6 +26,11 @@ public class Team {
         }else
             System.out.println("sorry The team is full");
     }
+
+    /**
+     *
+     * @param player1
+     */
     public void removePlayer(player player1){
         int key=0;
         player Play=new player();

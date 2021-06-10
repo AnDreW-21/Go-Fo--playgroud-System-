@@ -1,3 +1,8 @@
+/**
+ * @author nader
+ * @version 1.1
+ */
+
 package all_system;
 
 import java.sql.Time;
@@ -15,6 +20,14 @@ public class Playground {
         this.price = 0;
     }
 
+    /**
+     *
+     * @param name
+     * @param dateTime
+     * @param state
+     * @param price
+     * @param owner
+     */
     public Playground(String name, String []dateTime, boolean state, int price,owner owner) {
         this.name = name;
         this.dateTime = dateTime;
@@ -22,6 +35,7 @@ public class Playground {
         this.price = price;
         this.Owner=owner;
     }
+
     void print(){
         System.out.println("NAme->"+name);
         System.out.println("Price->"+price);

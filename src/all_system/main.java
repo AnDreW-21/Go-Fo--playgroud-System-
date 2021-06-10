@@ -1,4 +1,12 @@
+/**
+ * @version 1.1
+ * @author andrew
+ *
+ */
+
+
 package all_system;
+
 
 import java.util.Scanner;
 
@@ -19,6 +27,13 @@ public class main {
         System.out.println("2- log-in");
         System.out.println("3- exit");
     }
+
+    /**
+     *
+     * @param p
+     * @param pIndex
+     * @param sc
+     */
     public static  void AddingTeamMenu(player p,int pIndex,Scanner sc){
         System.out.println("How many players will you add(other than yourself)?");
         int nPlayers = sc.nextInt();
@@ -44,6 +59,13 @@ public class main {
         teamsCounter++;
         System.out.println("team added successfully");
     }
+
+    /**
+     *
+     * @param arr
+     * @param index
+     * @return
+     */
     public static String[] removeTheElement(String[] arr, int index) {
         if (arr == null || index < 0 || index >= arr.length) {
             return arr;
@@ -70,13 +92,25 @@ public class main {
         System.out.println("2- Creat Team");
         System.out.println("3- sign out");
     }
+
+    /**
+     *
+     * @param O
+     * @param sc
+     */
     public static  void EditPlaygroundMenu(owner O,Scanner sc){
+        boolean anyAvailable = false;
         System.out.println("these are the available playgrounds for you");
         for (int j=0;j<groundCounter;j++){
             if(grounds[j].Owner.getName().equals(O.getName())){
                 System.out.print(j+"- ");
                 grounds[j].print();
+                anyAvailable =true;
             }
+        }
+        if (!anyAvailable){
+            System.out.println("---no available playgrounds");
+            return;
         }
         String slots[];
         slots = new String[3];
@@ -91,7 +125,7 @@ public class main {
         System.out.print("Add slots");
         System.out.println("  Enter time in Format(From->To \"in hours\")");
         System.out.println("the first:");
-        slots[0] = sc.nextLine();
+        slots[0] = sc.next();
         System.out.println("the second:");
         slots[1] = sc.next();
         System.out.println("the third:");
@@ -103,6 +137,12 @@ public class main {
         System.out.println("playground changed successfully");
 
     }
+
+    /**
+     *
+     * @param O
+     * @param sc
+     */
     public static void RemovePlaygroundMenu(owner O, Scanner sc){
         System.out.println("These are the available playgrounds for you");
         for (int j=0;j<groundCounter;j++){
@@ -123,6 +163,10 @@ public class main {
 
     }
 
+    /**
+     *
+     * @param Str
+     */
     public static void main(String[] Str) {
 
         grounds = new Playground[100];
@@ -139,122 +183,134 @@ public class main {
         int  price;
         String x, name, address, phone, password, slots[],time;
         slots = new String[3];
-        while (true) {
+        while(true){
             print();
             Scanner sc = new Scanner(System.in);
             x = sc.next();
-            if (x.equals("1")) {
-                System.out.println("Enter your name");
-                name = sc.next();
-                System.out.println("Enter password");
-                password = sc.next();
-                System.out.println("Enter phone");
-                phone = sc.next();
-                System.out.println("Enter address");
-                address = sc.next();
-                System.out.println("1-owner");
-                System.out.println("2-player");
-                x = sc.next();
-                if (x.equals("1")) {
-                    owners[ownersCounter] = new owner(name, address, phone, password, 0);
-                    ownersCounter++;
-                } else {
-                    players[playersCounter] = new player(name, address, phone, password, 0);
-                    playersCounter++;
-                }
-            } else if (x.equals("2")) {
-                System.out.println("Enter your name");
-                name = sc.next();
-                System.out.println("Enter password");
-                password = sc.next();
-                System.out.println("1-owner");
-                System.out.println("2-player");
-                x = sc.next();
-                boolean check = false;
-                if (x.equals("1")) {
-                    owner O = new owner();
-                    int ownerIdex ;
-                    for (int k = 0; k < ownersCounter; k++) {
-                        if (owners[k].getName().equals(name) && owners[k].getPassWord().equals(password)) {
-                            check = true;
-                            O = owners[k];
-                            ownerIdex =k;
-                        }
-                    }
+            if (x.equals("3")){break;}
+//            boolean exit = false;
 
-                    if (check) {
-                        System.out.println("Welcome in the System");
-                        MenuOwner();
-                        x = sc.next();
-                        if (x.equals("1")) {
-                            System.out.println("ADD Name");
-                            name = sc.next();
-                            System.out.print("Add slots");
-                            System.out.println("  Enter time in Format(From->To \"in hours\")");
-                            System.out.println("the first:");
-                            sc.skip("\n");
-                            slots[0] = sc.nextLine();
-                            System.out.println("the second:");
-                            slots[1] = sc.next();
-                            System.out.println("the third:");
-                            slots[2] = sc.next();
-                            System.out.println("Add your Price");
-                            price = sc.nextInt();
-//                            sc.skip("\n");
-                            grounds[groundCounter] = new Playground(name, slots, true, price, O);
-                            groundCounter++;
-                            System.out.println("playground added");
-                        } else if (x.equals("2")) {
-                            EditPlaygroundMenu(O,sc);
-                        } else if (x.equals("3")) {
-                            RemovePlaygroundMenu(O,sc);
-                        }
-                    }else{
-                        System.out.println("invalid credentials");
+                if (x.equals("1")) {
+                    System.out.println("Enter your name");
+                    name = sc.next();
+                    System.out.println("Enter password");
+                    password = sc.next();
+                    System.out.println("Enter phone");
+                    phone = sc.next();
+                    System.out.println("Enter address");
+                    address = sc.next();
+                    System.out.println("1-owner");
+                    System.out.println("2-player");
+                    String signUPownerorPlayer = sc.next();
+                    if (signUPownerorPlayer.equals("1")) {
+                        owners[ownersCounter] = new owner(name, address, phone, password, 0);
+                        ownersCounter++;
+                    } else {
+                        players[playersCounter] = new player(name, address, phone, password, 0);
+                        playersCounter++;
                     }
-
-                }else if(x.equals("2")){
-                    check= false;
-                    player p = new player();
-                    int pIndex=0;
-                    for (int k = 0; k < playersCounter; k++) {
-                        if (players[k].getName().equals(name) && players[k].getPassWord().equals(password)) {
-                            check = true;
-                            p = players[k];
-                            pIndex = k;
-                        }
-                    }
-                    if (check) {
-                        System.out.println("Welcome in the System");
-                        MenuPlayer();
-                        x = sc.next();
-                        if(x.equals("1")){
-                            for (int f=0;f<groundCounter;f++){
-                                System.out.print(f);
-                                System.out.print("- ");
-                                grounds[f].print();
+                } else if (x.equals("2")) {
+                    System.out.println("Enter your name");
+                    name = sc.next();
+                    System.out.println("Enter password");
+                    password = sc.next();
+                    System.out.println("1-owner");
+                    System.out.println("2-player");
+                    x = sc.next();
+                    boolean check = false;
+                    if (x.equals("1")) {
+                        owner O = new owner();
+                        int ownerIdex;
+                        for (int k = 0; k < ownersCounter; k++) {
+                            if (owners[k].getName().equals(name) && owners[k].getPassWord().equals(password)) {
+                                check = true;
+                                O = owners[k];
+                                ownerIdex = k;
                             }
-                            System.out.println("Enter play ground number");
-                            int playgroundNumber=sc.nextInt();
-                            grounds[playgroundNumber].print();
-                            System.out.println("Enter Slot number: ");
-                            int slotNumber =sc.nextInt();
-                            String bookingSlot = grounds[playgroundNumber].dateTime[slotNumber];
-                            grounds[playgroundNumber].dateTime = removeTheElement(grounds[playgroundNumber].dateTime,slotNumber);
-                            bookings[bookingsCounter] = new Booking(grounds[playgroundNumber],bookingSlot,p);
-                            bookingsCounter++;
-                            System.out.println("booked successfully");
-                        }else if (x.equals("2")){
-                            AddingTeamMenu(p,pIndex,sc);
                         }
-                    }else{
-                        System.out.println("invalid credentials");
-                    }
-                }
 
-            }else{
-                break;
+                        if (check) {
+                            while(true){
+                                System.out.println("Welcome in the System");
+                                MenuOwner();
+                                x = sc.next();
+                                if (x.equals("1")) {
+                                    System.out.println("ADD Name");
+                                    name = sc.next();
+                                    System.out.print("Add slots");
+                                    System.out.println("  Enter time in Format(From->To \"in hours\")");
+                                    System.out.println("the first:");
+                                    sc.skip("\n");
+                                    slots[0] = sc.nextLine();
+                                    System.out.println("the second:");
+                                    slots[1] = sc.next();
+                                    System.out.println("the third:");
+                                    slots[2] = sc.next();
+                                    System.out.println("Add your Price");
+                                    price = sc.nextInt();
+//                            sc.skip("\n");
+                                    grounds[groundCounter] = new Playground(name, slots, true, price, O);
+                                    groundCounter++;
+                                    System.out.println("playground added");
+                                } else if (x.equals("2")) {
+                                    EditPlaygroundMenu(O, sc);
+                                } else if (x.equals("3")) {
+                                    RemovePlaygroundMenu(O, sc);
+                                }else{
+                                    break;
+                                }
+                            }
+
+                        } else {
+                            System.out.println("invalid credentials");
+                        }
+
+                    } else if (x.equals("2")) {
+                        check = false;
+                        player p = new player();
+                        int pIndex = 0;
+                        for (int k = 0; k < playersCounter; k++) {
+                            if (players[k].getName().equals(name) && players[k].getPassWord().equals(password)) {
+                                check = true;
+                                p = players[k];
+                                pIndex = k;
+                            }
+                        }
+                        if (check) {
+                          while(true)  {
+                                System.out.println("Welcome in the System");
+                                MenuPlayer();
+                                x = sc.next();
+                                if (x.equals("1")) {
+                                    for (int f = 0; f < groundCounter; f++) {
+                                        System.out.print(f);
+                                        System.out.print("- ");
+                                        grounds[f].print();
+                                    }
+                                    System.out.println("Enter play ground number");
+                                    int playgroundNumber = sc.nextInt();
+                                    grounds[playgroundNumber].print();
+                                    System.out.println("Enter Slot number: ");
+                                    int slotNumber = sc.nextInt();
+                                    String bookingSlot = grounds[playgroundNumber].dateTime[slotNumber];
+                                    grounds[playgroundNumber].dateTime = removeTheElement(grounds[playgroundNumber].dateTime, slotNumber);
+                                    bookings[bookingsCounter] = new Booking(grounds[playgroundNumber], bookingSlot, p);
+                                    bookingsCounter++;
+                                    System.out.println("booked successfully");
+                                } else if (x.equals("2")) {
+                                    AddingTeamMenu(p, pIndex, sc);
+                                }else{
+                                    break;
+                                }
+                            }
+                        } else {
+                            System.out.println("invalid credentials");
+                        }
+                    }
+
+                } else {
+                    break;
+                }
             }
-        }
     }
 }

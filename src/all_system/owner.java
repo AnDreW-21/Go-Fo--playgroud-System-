@@ -1,3 +1,7 @@
+/**
+ * @author paula
+ * @version 1.1
+ */
 package all_system;
 
 public class owner extends player {
@@ -9,6 +13,11 @@ public class owner extends player {
         super(" ", " "," "," ",0);
     }
 
+    /**
+     *
+     * @param ground
+     * @param playgrounds
+     */
     public void addPlayGround(Playground ground, Playground [] playgrounds){
         for (int i=0; i<playgrounds.length;i++ ){
             if(playgrounds[i].name.equals("")){
